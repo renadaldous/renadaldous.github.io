@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renad Aldous — Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+:root {
+  --bg: #0a0e1a;
+  --bg-card: #111627;
+  --bg-card2: #1a2035;
+  --teal: #7dd3c8;
+  --blue: #5b9bd5;
+  --purple: #8b7dd3;
+  --red: #e05c5c;
+  --amber: #f0a500;
+  --text: #e8eaf2;
+  --muted: #5b9bd5;
+  --dim: #7dd3c8;
+  --border: rgba(255,255,255,0.07);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; overflow-x: hidden; }
+h1,h2,h3 { font-family: 'Space Grotesk', sans-serif; }
+img { max-width: 100%; display: block; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10,14,26,0.9); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 48px; display: flex; align-items: center; justify-content: space-between; height: 60px;
+}
+.nav-links { display: flex; gap: 32px; position: absolute; left: 50%; transform: translateX(-50%); }
+.nav-links a { color: #5b9bd5; font-size: 13px; text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--teal); }
+
+/* LAYOUT */
+section { padding: 100px 48px; max-width: 1100px; margin: 0 auto; }
+.section-eyebrow { font-size: 10px; font-weight: 500; color: var(--dim); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; }
+.section-heading { font-size: 32px; font-weight: 600; color: var(--text); margin-bottom: 40px; }
+.section-heading span { color: var(--teal); }
+
+/* HERO */
+#hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 120px; }
+.hero-inner { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; }
+.hero-left { flex: 1; }
+.hero-tag {
+  display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--teal); background: rgba(125,211,200,0.08); border: 1px solid rgba(125,211,200,0.2);
+  border-radius: 4px; padding: 5px 12px; margin-bottom: 20px;
+}
+.hero-name { font-size: 56px; font-weight: 700; line-height: 1.05; margin-bottom: 14px; }
+.hero-name span { color: var(--teal); }
+.hero-sub { font-size: 17px; color: #5b9bd5; margin-bottom: 36px; line-height: 1.6; }
+.hero-btn {
+  display: inline-block; background: var(--teal); color: var(--bg);
+  font-size: 13px; font-weight: 600; padding: 12px 28px; border-radius: 6px; text-decoration: none; transition: opacity 0.2s;
+}
+.hero-btn:hover { opacity: 0.85; }
+.hero-btn-outline {
+  display: inline-flex; align-items: center; gap: 7px; background: transparent; color: var(--teal);
+  font-size: 13px; font-weight: 600; padding: 12px 24px; border-radius: 6px; text-decoration: none;
+  border: 1.5px solid rgba(125,211,200,0.35); transition: background 0.2s, border-color 0.2s;
+}
+.hero-btn-outline:hover { background: rgba(125,211,200,0.08); border-color: rgba(125,211,200,0.6); }
+.hero-btn-outline i { font-size: 15px; }
+
+/* HERO CHART */
+.hero-chart { width: 280px; flex-shrink: 0; display: flex; flex-direction: column; justify-content: flex-end; }
+.chart-eyebrow { font-size: 10px; color: #5b9bd5; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 64px; position: relative; z-index: 3; display: block; width: 100%; }
+.bars { display: flex; align-items: flex-end; gap: 10px; height: 160px; }
+.bar-col { display: flex; flex-direction: column; align-items: center; gap: 7px; flex: 1; justify-content: flex-end; }
+.bar-inner { width: 100%; border-radius: 4px 4px 0 0; }
+.bar-label { font-size: 10px; color: #5b9bd5; }
+
+/* HERO BOTTOM */
+.hero-bottom { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.hero-badge {
+  font-size: 12px; color: var(--muted);
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 6px; padding: 8px 16px; display: flex; align-items: center; gap: 8px;
+}
+.hero-badge i { font-size: 15px; color: var(--teal); }
+
+/* JOURNEY */
+.journey-wrap { display: flex; flex-direction: column; gap: 0; position: relative; padding-left: 64px; }
+.tl-line { position: absolute; left: 21px; top: 22px; bottom: 22px; width: 2px; background: rgba(255,255,255,0.06); }
+.stop { display: flex; align-items: flex-start; position: relative; padding-bottom: 28px; }
+.stop:last-child { padding-bottom: 0; }
+.stop-icon {
+  position: absolute; left: -52px; top: 4px;
+  width: 44px; height: 44px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center; font-size: 22px;
+  border: 1px solid; flex-shrink: 0;
+}
+.ic-study { background: rgba(125,211,200,0.08); border-color: rgba(125,211,200,0.2); }
+.ic-intern { background: rgba(91,155,213,0.08); border-color: rgba(91,155,213,0.2); }
+.ic-grad { background: rgba(139,125,211,0.08); border-color: rgba(139,125,211,0.2); }
+.ic-work { background: rgba(125,211,200,0.12); border-color: rgba(125,211,200,0.3); }
+.stop-body { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; flex: 1; }
+.stop-date { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; margin-bottom: 5px; }
+.stop-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+.stop-sub { font-size: 12px; color: #5b9bd5; }
+.c-teal { color: var(--teal); }
+.c-blue { color: var(--blue); }
+.c-purple { color: var(--purple); }
+
+/* PROJECTS - cards (all consistent) */
+.proj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.proj-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 14px; overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s; display: flex; flex-direction: column;
+}
+.proj-card.highlight { border-color: rgba(125,211,200,0.35); box-shadow: 0 0 0 1px rgba(125,211,200,0.12); }
+.proj-card:hover { border-color: rgba(125,211,200,0.25); transform: translateY(-3px); }
+.proj-img { overflow: hidden; position: relative; height: 150px; flex-shrink: 0; background: var(--bg-card2); }
+.proj-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.proj-img-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 45%, var(--bg-card) 100%); }
+.proj-img-badge {
+  position: absolute; top: 10px; left: 10px;
+  background: rgba(7,40,87,0.85); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px; padding: 3px 8px; font-size: 9px; color: #a8c4e8; font-weight: 500; letter-spacing: 0.03em;
+}
+.featured-badge {
+  position: absolute; top: 10px; right: 10px;
+  background: rgba(125,211,200,0.18); border: 1px solid rgba(125,211,200,0.4);
+  border-radius: 4px; padding: 3px 9px; font-size: 9px; color: var(--teal); font-weight: 600; letter-spacing: 0.03em;
+  display: flex; align-items: center; gap: 4px;
+}
+.proj-body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+.proj-timeline { font-size: 10px; color: var(--dim); font-weight: 500; letter-spacing: 0.04em; margin-bottom: 6px; text-transform: uppercase; }
+.proj-name { font-family: 'Space Grotesk', sans-serif; font-size: 14.5px; font-weight: 600; color: var(--text); margin-bottom: 8px; line-height: 1.3; }
+.proj-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+.tech-badge {
+  font-size: 10px; color: var(--teal); font-weight: 500;
+  background: rgba(125,211,200,0.08); border: 1px solid rgba(125,211,200,0.18);
+  border-radius: 5px; padding: 3px 9px;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.proj-desc { font-size: 11.5px; color: #5b9bd5; line-height: 1.6; margin-bottom: 10px; }
+.impact-box { background: rgba(125,211,200,0.05); border: 1px solid rgba(125,211,200,0.12); border-radius: 8px; padding: 10px 12px; margin-bottom: 12px; }
+.impact-title { font-size: 9px; color: var(--teal); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; font-weight: 600; }
+.impact-item { font-size: 11px; color: var(--text); margin-bottom: 3px; display: flex; align-items: flex-start; gap: 6px; }
+.impact-item:last-child { margin-bottom: 0; }
+.impact-item i { color: var(--teal); font-size: 12px; margin-top: 1px; flex-shrink: 0; }
+.proj-actions { margin-top: auto; padding-top: 4px; }
+.proj-btn {
+  font-size: 11.5px; font-weight: 600; color: var(--bg);
+  background: var(--teal);
+  border-radius: 7px; padding: 9px 14px; text-decoration: none;
+  display: flex; align-items: center; gap: 6px; justify-content: center;
+  transition: opacity 0.2s; width: 100%;
+}
+.proj-btn:hover { opacity: 0.85; }
+.proj-btn i { font-size: 13px; }
+
+/* CASE STUDY (shared structure for every project) */
+.case-study { border-top: 1px solid var(--border); }
+.case-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 8px; flex-wrap: wrap; }
+.case-header-left .section-eyebrow { margin-bottom: 6px; }
+.case-back { font-size: 12px; color: var(--dim); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 18px; }
+.case-back:hover { color: var(--teal); }
+.case-timeline-badge {
+  font-size: 11px; color: var(--teal); background: rgba(125,211,200,0.08);
+  border: 1px solid rgba(125,211,200,0.2); border-radius: 6px; padding: 7px 14px;
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; margin-top: 6px;
+}
+.case-disclaimer {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: rgba(240,165,0,0.06); border: 1px solid rgba(240,165,0,0.2);
+  border-radius: 10px; padding: 14px 16px; margin-bottom: 36px;
+  font-size: 13px; color: #f0a500; line-height: 1.6;
+}
+.case-disclaimer i { font-size: 16px; margin-top: 1px; flex-shrink: 0; }
+.case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.case-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 22px; }
+.case-block-wide { grid-column: 1 / -1; }
+.case-label { font-size: 11px; font-weight: 600; color: var(--teal); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; display: flex; align-items: center; gap: 7px; }
+.case-label i { font-size: 14px; }
+.case-label-note { color: var(--dim); font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 11px; margin-left: 4px; }
+.case-text { font-size: 13.5px; color: #5b9bd5; line-height: 1.75; }
+.case-list { font-size: 13.5px; color: #5b9bd5; line-height: 1.9; padding-left: 0; list-style: none; }
+.case-list li { margin-bottom: 7px; padding-left: 22px; position: relative; }
+.case-list li::before {
+  content: "\ea5e"; font-family: 'tabler-icons'; position: absolute; left: 0; top: 2px;
+  color: var(--teal); font-size: 13px;
+}
+.case-learned { background: rgba(125,211,200,0.04); border-left: 3px solid var(--teal); }
+.case-learned .case-text { color: var(--text); font-style: italic; }
+
+/* Gallery / Lightbox */
+.case-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.gallery-thumb {
+  border-radius: 10px; overflow: hidden; border: 1px solid var(--border);
+  cursor: pointer; position: relative; aspect-ratio: 16/10; background: var(--bg-card2);
+  transition: border-color 0.2s, transform 0.2s;
+}
+.gallery-thumb:hover { border-color: rgba(125,211,200,0.4); transform: translateY(-2px); }
+.gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-thumb-label {
+  position: absolute; bottom: 0; left: 0; right: 0; padding: 6px 8px;
+  background: linear-gradient(to top, rgba(10,14,26,0.9), transparent);
+  font-size: 10px; color: var(--text);
+}
+.lightbox {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(10,14,26,0.92); backdrop-filter: blur(6px);
+  align-items: center; justify-content: center; padding: 40px;
+}
+.lightbox.active { display: flex; }
+.lightbox img { max-width: 90vw; max-height: 85vh; border-radius: 10px; border: 1px solid var(--border); }
+.lightbox-close {
+  position: absolute; top: 24px; right: 32px; font-size: 28px; color: var(--text);
+  cursor: pointer; background: none; border: none; line-height: 1;
+}
+.lightbox-caption { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); font-size: 12px; color: var(--dim); }
+
+/* SKILLS */
+.skills-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.skill-group { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.group-badge { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 4px; padding: 4px 10px; display: inline-block; margin-bottom: 16px; }
+.badge-p { background: rgba(125,211,200,0.1); color: var(--teal); border: 1px solid rgba(125,211,200,0.2); }
+.badge-i { background: rgba(91,155,213,0.1); color: var(--blue); border: 1px solid rgba(91,155,213,0.2); }
+.badge-f { background: rgba(139,125,211,0.1); color: var(--purple); border: 1px solid rgba(139,125,211,0.2); }
+.skill-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+.skill-item:last-child { margin-bottom: 0; }
+.skill-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.dot-p { background: var(--teal); }
+.dot-i { background: var(--blue); }
+.dot-f { background: var(--purple); }
+.skill-name { font-size: 13px; font-weight: 500; color: var(--text); }
+.skill-sub { font-size: 11px; color: #5b9bd5; margin-top: 2px; }
+.ai-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.ai-eyebrow { font-size: 10px; color: #7dd3c8; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
+.ai-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+.ai-tag { font-size: 13px; color: var(--text); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: 8px; padding: 8px 16px; display: flex; align-items: center; gap: 8px; }
+.ai-tag i { font-size: 16px; color: var(--teal); }
+
+/* CONTACT */
+.contact-sub { font-size: 14px; color: #5b9bd5; margin-top: -24px; margin-bottom: 40px; }
+.graph-wrap { position: relative; width: 100%; height: 360px; display: flex; align-items: center; justify-content: center; margin-top: 60px; }
+svg.bg-lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.center-node {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+  width: 110px; height: 110px; border-radius: 50%;
+  background: rgba(125,211,200,0.07); border: 2px solid var(--teal);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; z-index: 2;
+}
+.center-initials { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; color: var(--teal); }
+.center-lbl { font-size: 9px; color: var(--dim); letter-spacing: 0.08em; }
+.outer-node {
+  position: absolute; width: 88px; height: 88px; border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 6px; text-decoration: none; z-index: 2; transition: transform 0.2s;
+}
+.outer-node i { font-size: 26px; }
+.outer-node span { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; }
+.n-email { top: -20px; left: 50%; transform: translateX(-50%); background: rgba(125,211,200,0.07); border: 1.5px solid rgba(125,211,200,0.25); color: var(--teal); }
+.n-email:hover { transform: translateX(-50%) scale(1.1); }
+.n-linkedin { top: 50%; left: 80px; transform: translateY(-50%); background: rgba(91,155,213,0.07); border: 1.5px solid rgba(91,155,213,0.25); color: var(--blue); }
+.n-linkedin:hover { transform: translateY(-50%) scale(1.1); }
+.n-github { top: 50%; right: 80px; transform: translateY(-50%); background: rgba(139,125,211,0.07); border: 1.5px solid rgba(139,125,211,0.25); color: var(--purple); }
+.n-github:hover { transform: translateY(-50%) scale(1.1); }
+
+footer { text-align: center; padding: 32px 48px; border-top: 1px solid var(--border); font-size: 12px; color: var(--dim); }
+footer span { color: var(--teal); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { position: static; transform: none; gap: 18px; }
+  section { padding: 64px 20px; }
+  .hero-inner { flex-direction: column; align-items: flex-start; gap: 32px; }
+  .hero-chart { width: 100%; }
+  .hero-name { font-size: 38px; }
+  .hero-bottom { flex-wrap: wrap; }
+  .proj-grid { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .case-grid { grid-template-columns: 1fr; }
+  .journey-wrap { padding-left: 52px; }
+  .stop-icon { left: -44px; width: 36px; height: 36px; font-size: 18px; }
+  .graph-wrap { height: 460px; }
+  .n-linkedin { left: 10px; }
+  .n-github { right: 10px; }
+}
+@media (max-width: 480px) {
+  .hero-name { font-size: 30px; }
+  .hero-tag { font-size: 10px; }
+  .bars { height: 120px; }
+  .case-header { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-links">
+    <a href="#journey">Journey</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <span class="hero-tag">Data Analyst</span>
+      <h1 class="hero-name">Hi, I'm <span>Renad</span></h1>
+      <p class="hero-sub">I turn raw data into clear insights<br>that drive real decisions.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="#projects" class="hero-btn">View my work</a>
+        <a href="resume.pdf" download class="hero-btn-outline"><i class="ti ti-download"></i> Download Resume</a>
+      </div>
+    </div>
+    <div class="hero-chart">
+      <div class="chart-eyebrow">Core tools</div>
+      <div class="bars" id="bars">
+        <div class="bar-col">
+          <div class="bar-inner" style="height:0;background:#7dd3c8;" data-h="155"></div>
+          <div class="bar-label">Excel</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-inner" style="height:0;background:#e05c5c;" data-h="140"></div>
+          <div class="bar-label">PPT</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-inner" style="height:0;background:#f0a500;" data-h="125"></div>
+          <div class="bar-label">Power BI</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-inner" style="height:0;background:#5b9bd5;" data-h="110"></div>
+          <div class="bar-label">SQL</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-inner" style="height:0;background:#8b7dd3;" data-h="90"></div>
+          <div class="bar-label">Tableau</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <span class="hero-badge"><i class="ti ti-briefcase"></i> 5 months experience</span>
+    <span class="hero-badge"><i class="ti ti-certificate"></i> 4 certifications</span>
+    <span class="hero-badge"><i class="ti ti-building"></i> 2 companies</span>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <div class="section-eyebrow">Where I've been</div>
+  <h2 class="section-heading">My <span>journey</span></h2>
+  <div class="journey-wrap">
+    <div class="tl-line"></div>
+    <div class="stop">
+      <div class="stop-icon ic-study">📚</div>
+      <div class="stop-body">
+        <div class="stop-date c-teal">AUG 2021</div>
+        <div class="stop-title">Started university</div>
+        <div class="stop-sub">Princess Nourah Bint Abdulrahman University — Information Systems</div>
+      </div>
+    </div>
+    <div class="stop">
+      <div class="stop-icon ic-intern">💼</div>
+      <div class="stop-body">
+        <div class="stop-date c-blue">SEP – DEC 2025</div>
+        <div class="stop-title">Cooperative Training</div>
+        <div class="stop-sub">Elm Company — Data Analysis &amp; Business Analysis</div>
+      </div>
+    </div>
+    <div class="stop">
+      <div class="stop-icon ic-grad">🎓</div>
+      <div class="stop-body">
+        <div class="stop-date c-purple">DEC 2025</div>
+        <div class="stop-title">Graduated</div>
+        <div class="stop-sub">B.Sc. Information Systems — Princess Nourah University</div>
+      </div>
+    </div>
+    <div class="stop">
+      <div class="stop-icon ic-work">📊</div>
+      <div class="stop-body">
+        <div class="stop-date c-teal">JUN – JUL 2026</div>
+        <div class="stop-title">Data Analysis Trainee</div>
+        <div class="stop-sub">Health Holding Company — Performance Department</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-eyebrow">What I've built</div>
+  <h2 class="section-heading">My <span>projects</span></h2>
+  <div class="proj-grid">
+
+    <!-- HHC card -->
+    <div class="proj-card highlight">
+      <div class="proj-img">
+        <img src="hhc-cover.png" alt="HHC Performance Review cover" />
+        <div class="proj-img-overlay"></div>
+        <span class="proj-img-badge">HEALTH HOLDING COMPANY</span>
+        <span class="featured-badge">⭐ Featured Case Study</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-timeline">June 2026 · Performance Reporting Internship</div>
+        <div class="proj-name">Departmental KPI Performance Analysis</div>
+        <div class="proj-tags">
+          <span class="tech-badge">PowerPoint</span>
+          <span class="tech-badge">Excel</span>
+          <span class="tech-badge">Power BI</span>
+        </div>
+        <div class="proj-desc">Designed executive-ready KPI performance reports for multiple departments, summarizing KPI results, key observations, and improvement opportunities. The showcased samples use sanitized/demo data to protect confidentiality.</div>
+        <div class="impact-box">
+          <div class="impact-title">Impact</div>
+          <div class="impact-item"><i class="ti ti-building"></i> 16 Departments Covered</div>
+          <div class="impact-item"><i class="ti ti-file-report"></i> Executive-ready KPI Reports</div>
+          <div class="impact-item"><i class="ti ti-chart-bar"></i> Clear Performance Trend Visuals</div>
+        </div>
+        <div class="proj-actions">
+          <a href="#case-hhc" class="proj-btn"><i class="ti ti-notebook"></i> View Case Study</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bu'rra card -->
+    <div class="proj-card">
+      <div class="proj-img">
+        <img src="burra-2.png" alt="Bu'rra app dashboard" />
+        <div class="proj-img-overlay"></div>
+        <span class="proj-img-badge">GRADUATION PROJECT</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-timeline">Jan – May 2025 · Graduation Project</div>
+        <div class="proj-name">Bu'rra — Infant Safety Detection App</div>
+        <div class="proj-tags">
+          <span class="tech-badge">Flutter</span>
+          <span class="tech-badge">Firebase</span>
+          <span class="tech-badge">Computer Vision</span>
+        </div>
+        <div class="proj-desc">AI-powered infant safety detection app that analyzes facial and physiological cues to detect choking signs in real time. The system uses MTCNN for face detection, HSV for skin color change analysis, CNN for classification, and Firebase/Flutter for the application.</div>
+        <div class="impact-box">
+          <div class="impact-title">Impact</div>
+          <div class="impact-item"><i class="ti ti-target"></i> 97.67% Model Accuracy</div>
+          <div class="impact-item"><i class="ti ti-bell-ringing"></i> Real-time Caregiver Alerts</div>
+          <div class="impact-item"><i class="ti ti-shield-check"></i> 0.96 Precision · 1.00 Recall</div>
+        </div>
+        <div class="proj-actions">
+          <a href="#case-burra" class="proj-btn"><i class="ti ti-notebook"></i> View Case Study</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard card -->
+    <div class="proj-card">
+      <div class="proj-img">
+        <img src="dashboard.png" alt="Sales and Orders Dashboard" />
+        <div class="proj-img-overlay"></div>
+        <span class="proj-img-badge">RAWAFED TECH COURSE</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-timeline">2025 · Self-directed Practice</div>
+        <div class="proj-name">Interactive Sales &amp; Orders Dashboard</div>
+        <div class="proj-tags">
+          <span class="tech-badge">Excel</span>
+          <span class="tech-badge">Power BI</span>
+          <span class="tech-badge">Pivot Tables</span>
+        </div>
+        <div class="proj-desc">Interactive dashboards with data cleaning, Pivot Tables, dynamic charts, and slicers to analyze business datasets and present insights clearly.</div>
+        <div class="impact-box">
+          <div class="impact-title">Impact</div>
+          <div class="impact-item"><i class="ti ti-chart-pie"></i> Multi-dimensional Sales View</div>
+          <div class="impact-item"><i class="ti ti-filter"></i> Dynamic Filtering by Region &amp; Category</div>
+          <div class="impact-item"><i class="ti ti-users"></i> Top Performer Breakdown</div>
+        </div>
+        <div class="proj-actions">
+          <a href="#case-dashboard" class="proj-btn"><i class="ti ti-notebook"></i> View Case Study</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ CASE STUDY: HHC ============ -->
+<section id="case-hhc" class="case-study">
+  <a href="#projects" class="case-back"><i class="ti ti-arrow-left"></i> Back to projects</a>
+  <div class="case-header">
+    <div class="case-header-left">
+      <div class="section-eyebrow">⭐ Featured Case Study</div>
+      <h2 class="section-heading" style="margin-bottom:0;">HHC KPI <span>Performance Analysis</span></h2>
+    </div>
+    <span class="case-timeline-badge"><i class="ti ti-calendar"></i> June 2026 · Performance Reporting Internship · Health Holding Company</span>
+  </div>
+
+  <div class="case-disclaimer">
+    <i class="ti ti-info-circle"></i>
+    All numbers, department names, and details shown below are demo / sanitized data, used solely to illustrate the structure and format of the work. No confidential HHC data is displayed.
+  </div>
+
+  <div class="case-grid">
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-file-description"></i> Overview</div>
+      <p class="case-text">As a Data Analysis Trainee in the Performance Department at Health Holding Company, I supported the quarterly KPI reporting cycle — turning raw performance data into clear, executive-ready presentations for leadership across the organization.</p>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-alert-triangle"></i> Challenge</div>
+      <p class="case-text">Quarterly KPI data from multiple departments needed to be transformed into clear, executive-ready performance reports that leadership could act on quickly — without digging through raw spreadsheets.</p>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-user"></i> My Role</div>
+      <p class="case-text">I analyzed departmental KPI data, identified key trends and performance gaps, and translated findings into structured PowerPoint reports that were easy for non-technical stakeholders to act on.</p>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-bulb"></i> Solution</div>
+      <p class="case-text">Analyzed KPI datasets, organized findings, built KPI scorecards, and designed executive-ready PowerPoint reports for leadership.</p>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-tools"></i> Tools Used</div>
+      <div class="proj-tags">
+        <span class="tech-badge"><i class="ti ti-table"></i> Excel</span>
+        <span class="tech-badge"><i class="ti ti-presentation"></i> PowerPoint</span>
+        <span class="tech-badge"><i class="ti ti-chart-bar"></i> Power BI</span>
+      </div>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-list-check"></i> Key Contributions</div>
+      <ul class="case-list">
+        <li>Analyzed KPI datasets across departments</li>
+        <li>Built KPI scorecards</li>
+        <li>Created executive-ready reports</li>
+        <li>Identified performance trends</li>
+        <li>Presented insights visually</li>
+      </ul>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-package"></i> What I Delivered</div>
+      <ul class="case-list">
+        <li>Executive-ready KPI scorecards for 16 departments</li>
+        <li>Quarterly performance summaries highlighting top and bottom KPIs</li>
+        <li>Clear visual breakdowns of targets vs. actuals for leadership review</li>
+      </ul>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-star"></i> Key Skills</div>
+      <div class="proj-tags">
+        <span class="tech-badge">KPI Reporting</span>
+        <span class="tech-badge">Data Analysis</span>
+        <span class="tech-badge">Executive Communication</span>
+        <span class="tech-badge">Performance Reporting</span>
+      </div>
+    </div>
+
+    <div class="case-block case-block-wide">
+      <div class="case-label"><i class="ti ti-photo"></i> Gallery <span class="case-label-note">(demo data)</span></div>
+      <div class="case-gallery">
+        <div class="gallery-thumb" onclick="openLightbox('hhc-cover.png','Cover page — demo data')">
+          <img src="hhc-cover.png" alt="HHC cover page" />
+          <span class="gallery-thumb-label">Cover page</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-block case-block-wide case-learned">
+      <div class="case-label"><i class="ti ti-bulb-filled"></i> What I Learned</div>
+      <p class="case-text">Learned how to transform raw KPI data into executive-ready reports, communicate insights effectively with stakeholders, and maintain confidentiality while presenting business performance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CASE STUDY: BU'RRA ============ -->
+<section id="case-burra" class="case-study">
+  <a href="#projects" class="case-back"><i class="ti ti-arrow-left"></i> Back to projects</a>
+  <div class="case-header">
+    <div class="case-header-left">
+      <div class="section-eyebrow">Graduation project</div>
+      <h2 class="section-heading" style="margin-bottom:0;">Bu'rra — <span>Infant Safety Detection</span></h2>
+    </div>
+    <span class="case-timeline-badge"><i class="ti ti-calendar"></i> 2025 · Graduation Project · Princess Nourah University</span>
+  </div>
+
+  <div class="case-grid">
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-file-description"></i> Overview</div>
+      <p class="case-text">Bu'rra is an AI-powered mobile application built as a graduation project to help caregivers monitor infants for choking incidents in real time, combining computer vision with a mobile app and cloud backend.</p>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-alert-triangle"></i> Challenge</div>
+      <p class="case-text">Infant choking incidents can happen silently and quickly, often when a caregiver isn't in the room. There was a need for an automated, non-intrusive way to detect early signs of distress and alert caregivers immediately.</p>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-user"></i> My Role</div>
+      <p class="case-text">I worked as part of a 4-person team, contributing across multiple areas of the project including data preparation, model evaluation, and application integration with Firebase and Flutter.</p>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-bulb"></i> Solution</div>
+      <p class="case-text">AI-powered infant safety detection app that analyzes facial and physiological cues to detect choking signs in real time. The system uses MTCNN for face detection, HSV for skin color change analysis, CNN for classification, and Firebase/Flutter for the application.</p>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-tools"></i> Tools Used</div>
+      <div class="proj-tags">
+        <span class="tech-badge"><i class="ti ti-brand-python"></i> Python</span>
+        <span class="tech-badge"><i class="ti ti-device-mobile"></i> Flutter</span>
+        <span class="tech-badge"><i class="ti ti-flame"></i> Firebase</span>
+        <span class="tech-badge"><i class="ti ti-face-id"></i> MTCNN</span>
+        <span class="tech-badge"><i class="ti ti-brain"></i> CNN</span>
+      </div>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-list-check"></i> Key Contributions</div>
+      <ul class="case-list">
+        <li>Collected and prepared training datasets</li>
+        <li>Supported model evaluation and testing</li>
+        <li>Integrated detection pipeline with the mobile app</li>
+        <li>Documented system testing and results</li>
+        <li>Presented technical findings to faculty supervisors</li>
+      </ul>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-package"></i> What I Delivered</div>
+      <ul class="case-list">
+        <li>A working real-time choking detection pipeline</li>
+        <li>A documented test suite covering face detection, color analysis, and classification</li>
+        <li>A final presentation summarizing methodology and results</li>
+      </ul>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-star"></i> Key Skills</div>
+      <div class="proj-tags">
+        <span class="tech-badge">Computer Vision</span>
+        <span class="tech-badge">Model Evaluation</span>
+        <span class="tech-badge">Mobile App Integration</span>
+        <span class="tech-badge">Team Collaboration</span>
+      </div>
+    </div>
+
+    <div class="case-block case-block-wide">
+      <div class="case-label"><i class="ti ti-photo"></i> Gallery</div>
+      <div class="case-gallery">
+        <div class="gallery-thumb" onclick="openLightbox('burra-1.png','Sign in screen')">
+          <img src="burra-1.png" alt="Bu'rra sign in screen" />
+          <span class="gallery-thumb-label">Sign in</span>
+        </div>
+        <div class="gallery-thumb" onclick="openLightbox('burra-2.png','Dashboard screen')">
+          <img src="burra-2.png" alt="Bu'rra dashboard screen" />
+          <span class="gallery-thumb-label">Dashboard</span>
+        </div>
+        <div class="gallery-thumb" onclick="openLightbox('burra-3.png','Live monitor screen')">
+          <img src="burra-3.png" alt="Bu'rra live monitor screen" />
+          <span class="gallery-thumb-label">Live monitor</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-block case-block-wide case-learned">
+      <div class="case-label"><i class="ti ti-bulb-filled"></i> What I Learned</div>
+      <p class="case-text">Learned how to collaborate in an AI project and apply computer vision concepts using Flutter, Firebase, and machine learning techniques.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CASE STUDY: DASHBOARD ============ -->
+<section id="case-dashboard" class="case-study">
+  <a href="#projects" class="case-back"><i class="ti ti-arrow-left"></i> Back to projects</a>
+  <div class="case-header">
+    <div class="case-header-left">
+      <div class="section-eyebrow">Self-directed practice</div>
+      <h2 class="section-heading" style="margin-bottom:0;">Sales &amp; Orders <span>Dashboard</span></h2>
+    </div>
+    <span class="case-timeline-badge"><i class="ti ti-calendar"></i> 2025 · Rawafed Tech Course</span>
+  </div>
+
+  <div class="case-grid">
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-file-description"></i> Overview</div>
+      <p class="case-text">A self-directed practice project built during the Rawafed Tech "Data Analysis Using Excel &amp; Power BI" course, using a sample coffee shop sales dataset to practice end-to-end dashboard building.</p>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-alert-triangle"></i> Challenge</div>
+      <p class="case-text">Raw transactional sales data across regions, categories, and order types needed to be turned into an interactive view that could answer business questions at a glance.</p>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-user"></i> My Role</div>
+      <p class="case-text">I worked independently through the full process — from cleaning the raw dataset to designing the final interactive dashboard.</p>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-bulb"></i> Solution</div>
+      <p class="case-text">Cleaned and structured the dataset, built Pivot Tables to summarize key metrics, then designed an interactive Power BI dashboard with slicers for category, country, and order type.</p>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-tools"></i> Tools Used</div>
+      <div class="proj-tags">
+        <span class="tech-badge"><i class="ti ti-table"></i> Excel</span>
+        <span class="tech-badge"><i class="ti ti-chart-bar"></i> Power BI</span>
+      </div>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-list-check"></i> Key Contributions</div>
+      <ul class="case-list">
+        <li>Cleaned and structured the raw sales dataset</li>
+        <li>Built Pivot Tables for key metrics</li>
+        <li>Designed interactive charts and slicers</li>
+        <li>Identified top-performing categories and regions</li>
+      </ul>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-package"></i> What I Delivered</div>
+      <ul class="case-list">
+        <li>A fully interactive sales and orders dashboard</li>
+        <li>Breakdown of sales by month, category, country, and city</li>
+        <li>Top 10 employee performance ranking view</li>
+      </ul>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label"><i class="ti ti-star"></i> Key Skills</div>
+      <div class="proj-tags">
+        <span class="tech-badge">Data Cleaning</span>
+        <span class="tech-badge">Pivot Tables</span>
+        <span class="tech-badge">Data Visualization</span>
+        <span class="tech-badge">Dashboard Design</span>
+      </div>
+    </div>
+
+    <div class="case-block case-block-wide">
+      <div class="case-label"><i class="ti ti-photo"></i> Gallery</div>
+      <div class="case-gallery">
+        <div class="gallery-thumb" onclick="openLightbox('dashboard.png','Sales & Orders dashboard')">
+          <img src="dashboard.png" alt="Sales dashboard" />
+          <span class="gallery-thumb-label">Full dashboard</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-block case-block-wide case-learned">
+      <div class="case-label"><i class="ti ti-bulb-filled"></i> What I Learned</div>
+      <p class="case-text">Learned how to take a raw dataset from cleaning to a polished, interactive dashboard — and how design choices like slicers and chart types directly affect how easily a business question gets answered.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-eyebrow">What I work with</div>
+  <h2 class="section-heading">My <span>skills</span></h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <span class="group-badge badge-p">Proficient</span>
+      <div class="skill-item"><div class="skill-dot dot-p"></div><div><div class="skill-name">Microsoft Excel</div><div class="skill-sub">Pivot Tables, advanced formulas</div></div></div>
+      <div class="skill-item"><div class="skill-dot dot-p"></div><div><div class="skill-name">PowerPoint</div><div class="skill-sub">Executive presentations</div></div></div>
+      <div class="skill-item"><div class="skill-dot dot-p"></div><div><div class="skill-name">KPI Reporting</div><div class="skill-sub">Performance scorecards</div></div></div>
+    </div>
+    <div class="skill-group">
+      <span class="group-badge badge-i">Intermediate</span>
+      <div class="skill-item"><div class="skill-dot dot-i"></div><div><div class="skill-name">Power BI</div><div class="skill-sub">Dashboards &amp; reports</div></div></div>
+      <div class="skill-item"><div class="skill-dot dot-i"></div><div><div class="skill-name">SQL</div><div class="skill-sub">Queries &amp; data retrieval</div></div></div>
+    </div>
+    <div class="skill-group">
+      <span class="group-badge badge-f">Familiar</span>
+      <div class="skill-item"><div class="skill-dot dot-f"></div><div><div class="skill-name">Tableau</div><div class="skill-sub">Data visualization</div></div></div>
+    </div>
+  </div>
+  <div class="ai-section">
+    <div class="ai-eyebrow">Productivity Tools</div>
+    <div class="ai-tags">
+      <span class="ai-tag"><i class="ti ti-robot"></i> Claude</span>
+      <span class="ai-tag"><i class="ti ti-robot"></i> ChatGPT</span>
+      <span class="ai-tag"><i class="ti ti-sparkles"></i> Generative AI</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-eyebrow">Get in touch</div>
+  <h2 class="section-heading">Let's <span>connect</span></h2>
+  <p class="contact-sub">Open to data analysis opportunities, collaborations, and internships.</p>
+  <div class="graph-wrap">
+    <svg class="bg-lines">
+      <circle cx="50%" cy="50%" r="130" stroke="rgba(255,255,255,0.03)" stroke-width="1" fill="none"/>
+      <circle cx="50%" cy="50%" r="80" stroke="rgba(255,255,255,0.03)" stroke-width="1" fill="none"/>
+      <line x1="50%" y1="50%" x2="50%" y2="20" stroke="rgba(125,211,200,0.15)" stroke-width="1.5" stroke-dasharray="5,4"/>
+      <line x1="50%" y1="50%" x2="15%" y2="50%" stroke="rgba(91,155,213,0.15)" stroke-width="1.5" stroke-dasharray="5,4"/>
+      <line x1="50%" y1="50%" x2="85%" y2="50%" stroke="rgba(139,125,211,0.15)" stroke-width="1.5" stroke-dasharray="5,4"/>
+    </svg>
+    <div class="center-node">
+      <div class="center-initials">RA</div>
+      <div class="center-lbl">RENAD ALDOUS</div>
+    </div>
+    <a href="mailto:Renadaldous60@gmail.com" class="outer-node n-email">
+      <i class="ti ti-mail"></i><span>EMAIL</span>
+    </a>
+    <a href="https://linkedin.com/in/rinad-aldous" target="_blank" class="outer-node n-linkedin">
+      <i class="ti ti-brand-linkedin"></i><span>LINKEDIN</span>
+    </a>
+    <a href="https://renadaldous.github.io/Renad-Portfolio" target="_blank" class="outer-node n-github">
+      <i class="ti ti-brand-github"></i><span>GITHUB</span>
+    </a>
+  </div>
+</section>
+
+<footer>Built with passion by <span>Renad Aldous</span> · 2026</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+  <img id="lightbox-img" src="" alt="" />
+  <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+
+<script>
+setTimeout(() => {
+  document.querySelectorAll('.bar-inner').forEach(bar => {
+    bar.style.transition = 'height 1s cubic-bezier(0.34,1.56,0.64,1)';
+    bar.style.height = bar.dataset.h + 'px';
+  });
+}, 400);
+
+function openLightbox(src, caption) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-caption').textContent = caption || '';
+  document.getElementById('lightbox').classList.add('active');
+}
+function closeLightbox(e) {
+  if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+}
+</script>
+</body>
+</html>
